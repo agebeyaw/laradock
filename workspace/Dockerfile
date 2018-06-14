@@ -259,7 +259,7 @@ RUN if [ ${INSTALL_WORKSPACE_SSH} = true ]; then \
 # MongoDB:
 ###########################################################################
 
-ARG INSTALL_MONGO=false
+ARG INSTALL_MONGO=${INSTALL_MONGO}
 ARG PHP_VERSION=${PHP_VERSION}
 
 RUN if [ ${INSTALL_MONGO} = true ]; then \

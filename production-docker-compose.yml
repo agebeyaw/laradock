@@ -13,7 +13,7 @@ volumes:
     driver: ${VOLUMES_DRIVER}
   phpmyadmin:
     driver: ${VOLUMES_DRIVER}
-  nginx:
+  caddy:
     driver: ${VOLUMES_DRIVER}
 
 services:
@@ -151,56 +151,23 @@ services:
       networks:
         - backend
 
-### NGINX Server #########################################
-    nginx:
-      build:
-        context: ./nginx
-        args:
-          - PHP_UPSTREAM_CONTAINER=${NGINX_PHP_UPSTREAM_CONTAINER}
-          - PHP_UPSTREAM_PORT=${NGINX_PHP_UPSTREAM_PORT}
+### Caddy Server #########################################
+    caddy:
+      build: ./caddy
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
-        - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
-        - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
+        - ${CADDY_CUSTOM_CADDYFILE}:/etc/Caddyfile
+        - ${CADDY_HOST_LOG_PATH}:/var/log/caddy
+        - ${DATA_PATH_HOST}:/root/.caddy
       ports:
-        - "${NGINX_HOST_HTTP_PORT}:80"
-        - "${NGINX_HOST_HTTPS_PORT}:443"
+        - "${CADDY_HOST_HTTP_PORT}:80"
+        - "${CADDY_HOST_HTTPS_PORT}:443"
       depends_on:
         - php-fpm
       networks:
         - frontend
         - backend
 
-
-### phpMyAdmin ###########################################
-    phpmyadmin:
-      build: ./phpmyadmin
-      environment:
-        - PMA_ARBITRARY=1
-        - MYSQL_USER=${PMA_USER}
-        - MYSQL_PASSWORD=${PMA_PASSWORD}
-        - MYSQL_ROOT_PASSWORD=${PMA_ROOT_PASSWORD}
-      ports:
-        - "${PMA_PORT}:80"
-      depends_on:
-        - "${PMA_DB_ENGINE}"
-      networks:
-        - frontend
-        - backend
-
-
-### Certbot #########################################
-    certbot:
-      build:
-        context: ./certbot
-      volumes:
-        - ./data/certbot/certs/:/var/certs
-        - ./certbot/letsencrypt/:${APP_CODE_PATH_CONTAINER}/letsencrypt
-      environment:
-        - CN="fake.domain.com"
-        - EMAIL="contact@qulph.com"
-      networks:
-        - frontend
 
 ### Jenkins ###################################################
     jenkins:

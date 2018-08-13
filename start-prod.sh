@@ -10,8 +10,13 @@ then
 fi
 
 sudo docker-compose stop
-sudo docker-compose up -d workspace caddy mariadb php-fpm
 
+if [ "$1" == "provision" -o "$1" == "rebuild" ]
+then
+    sudo docker-compose up -d --build workspace caddy mariadb php-fpm
+else
+    sudo docker-compose up -d workspace caddy mariadb php-fpm
+fi
 
 if [ "$1" == "provision" ]
 then

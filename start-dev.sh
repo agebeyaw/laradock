@@ -10,8 +10,12 @@ then
 fi
 
 sudo docker-compose stop
-sudo docker-compose up -d workspace nginx mariadb phpmyadmin php-fpm portainer
-
+if [ "$1" == "provision" -o "$1" == "rebuild" ]
+then
+    sudo docker-compose up -d --build workspace nginx mariadb phpmyadmin php-fpm portainer
+else
+    sudo docker-compose up -d workspace nginx mariadb phpmyadmin php-fpm portainer
+fi
 
 if [ "$1" == "provision" ]
 then

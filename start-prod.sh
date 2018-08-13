@@ -24,7 +24,7 @@ then
     sudo docker-compose exec workspace bash -c "
 
             # application dir
-            cd /app/qulph/application
+            cd //var/www/qulph/application
 
             # clear cache
             rm -rf runtime/cache/

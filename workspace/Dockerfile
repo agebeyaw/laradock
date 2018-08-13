@@ -222,6 +222,14 @@ RUN if [ ${INSTALL_SUBVERSION} = true ]; then \
 ;fi
 
 
+ARG INSTALL_ZIP=false
+
+RUN if [ ${INSTALL_ZIP} = true ]; then \
+    apt-get install -y zip unzip \
+;fi
+
+
+
 ###########################################################################
 # xDebug:
 ###########################################################################

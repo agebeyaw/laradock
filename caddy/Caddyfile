@@ -1,22 +1,25 @@
 # Docs: https://caddyserver.com/docs/caddyfile
+
 qulph.com:443 {
+
     root /var/www/qulph/application/web
+
     fastcgi / php-fpm:9000 php {
         index index.php
     }
 
-    # To handle .html extensions with laravel change ext to
+    # To handle .html extensions change ext to
     # ext / .html
 
     rewrite {
         to {path} {path}/ /index.php?{query}
     }
+
     gzip
     browse
     log /var/log/caddy/access.log
     errors /var/log/caddy/error.log
-    # Uncomment to enable TLS (HTTPS)
-    # Change the first list to listen on port 443 when enabling TLS
+
     tls contact@qulph.com
 
     # To use Lets encrpt tls with a DNS provider uncomment these

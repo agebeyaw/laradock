@@ -6,16 +6,17 @@
 if [ "$1" == "provision" ]
 then
     # removes all the database data
-    sudo rm -rf ~/.laradock/data/
+    sudo rm -rf ~/.laradock/data/mariadb
 fi
 
 sudo docker-compose stop
+
 if [ "$1" == "provision" -o "$1" == "rebuild" ]
 then
-    sudo docker-compose up -d --build workspace nginx mariadb phpmyadmin php-fpm portainer
-else
-    sudo docker-compose up -d workspace nginx mariadb phpmyadmin php-fpm portainer
+    sudo docker-compose build --no-cache workspace nginx mariadb phpmyadmin php-fpm portainer
 fi
+
+sudo docker-compose up -d workspace nginx mariadb phpmyadmin php-fpm portainer
 
 if [ "$1" == "provision" ]
 then

@@ -139,7 +139,7 @@ services:
         - ${CADDY_HOST_LOG_PATH}:/var/log/caddy
         - ${DATA_PATH_HOST}:/root/.caddy
       environment:
-        CADDYPATH: /etc/ssl/caddy DO_AUTH_TOKEN=${CADDY_DO_AUTH_TOKEN}
+        - CADDYPATH=/etc/ssl/caddy DO_AUTH_TOKEN=${CADDY_DO_AUTH_TOKEN}
       ports:
         - "${CADDY_HOST_HTTP_PORT}:80"
         - "${CADDY_HOST_HTTPS_PORT}:443"

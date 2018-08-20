@@ -2,9 +2,10 @@ FROM zuohuadong/caddy:alpine
 
 LABEL maintainer="Huadong Zuo <admin@zuohuadong.cn>"
 
-ARG plugins="cors"
+# ARG plugins="cors"
 
-## ARG plugins="cors cgi cloudflare azure linode"
+# ARG plugins="cors cgi cloudflare azure linode"
+ARG plugins="cors digitalocean"
 
 
 RUN caddyplug install ${plugins}

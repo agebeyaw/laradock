@@ -16,7 +16,7 @@ then
     sudo docker-compose up -d --build workspace nginx mariadb phpmyadmin php-fpm portainer
 elif [ "$1" == "rebuild" ]
 then
-    sudo docker-compose build -d --no-cache workspace nginx mariadb phpmyadmin php-fpm portainer
+    sudo docker-compose build --no-cache workspace nginx mariadb phpmyadmin php-fpm portainer
     sudo docker-compose up -d workspace nginx mariadb phpmyadmin php-fpm portainer
 else
     sudo docker-compose up -d workspace nginx mariadb phpmyadmin php-fpm portainer

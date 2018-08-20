@@ -24,7 +24,7 @@
 
     # To use Lets encrpt tls with a DNS provider uncomment these
     # lines and change the provider as required
-    #tls {
-    #  dns cloudflare
-    #}
+    tls {
+      dns digitalocean
+    }
 }

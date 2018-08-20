@@ -16,7 +16,7 @@ then
     sudo docker-compose up -d --build workspace caddy mariadb php-fpm
 elif [ "$1" == "rebuild" ]
 then
-    sudo docker-compose build -d --no-cache workspace caddy mariadb php-fpm
+    sudo docker-compose build --no-cache workspace caddy mariadb php-fpm
     sudo docker-compose up -d workspace caddy mariadb php-fpm
 else
     sudo docker-compose up -d workspace caddy mariadb php-fpm

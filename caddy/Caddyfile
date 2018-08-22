@@ -1,6 +1,6 @@
 # Docs: https://caddyserver.com/docs/caddyfile
 
-:80, 443 {
+(common) {
   tls {
     max_certs 50000
   }
@@ -9,6 +9,11 @@
   tls {
     dns digitalocean
   }
+
+  gzip
+  browse
+  log /var/log/caddy/access.log
+  errors /var/log/caddy/error.log
 }
 
 
@@ -27,10 +32,8 @@
         to {path} {path}/ /index.php?{query}
     }
 
-    gzip
-    browse
-    log /var/log/caddy/access.log
-    errors /var/log/caddy/error.log
+    import common
+
 }
 
 
@@ -49,9 +52,6 @@ api.qulph.com:443 {
         to {path} {path}/ /index.php?{query}
     }
 
-    gzip
-    browse
-    log /var/log/caddy/access.log
-    errors /var/log/caddy/error.log
+    import common
 
 }

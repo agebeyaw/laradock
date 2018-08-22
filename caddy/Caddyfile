@@ -1,6 +1,6 @@
 # Docs: https://caddyserver.com/docs/caddyfile
 
-*.qulph.com:443 {
+demo.qulph.com:443 {
 
     root /var/www/qulph/application/web
 

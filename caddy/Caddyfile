@@ -1,6 +1,17 @@
 # Docs: https://caddyserver.com/docs/caddyfile
 
-:443
+:80, 443 {
+  tls {
+    max_certs 50000
+  }
+  # To use Lets encrpt tls with a DNS provider uncomment these
+    # lines and change the provider as required
+  tls {
+    dns digitalocean
+  }
+}
+
+
 demo.qulph.com:443 {
 
     root /var/www/qulph/application/web
@@ -16,6 +27,10 @@ demo.qulph.com:443 {
         to {path} {path}/ /index.php?{query}
     }
 
+    gzip
+    browse
+    log /var/log/caddy/access.log
+    errors /var/log/caddy/error.log
 }
 
 
@@ -33,17 +48,10 @@ api.qulph.com:443 {
     rewrite {
         to {path} {path}/ /index.php?{query}
     }
-}
 
-gzip
-browse
-log /var/log/caddy/access.log
-errors /var/log/caddy/error.log
+    gzip
+    browse
+    log /var/log/caddy/access.log
+    errors /var/log/caddy/error.log
 
-tls contact@qulph.com
-
-# To use Lets encrpt tls with a DNS provider uncomment these
-# lines and change the provider as required
-tls {
-  dns digitalocean
 }

@@ -1,6 +1,7 @@
 # Docs: https://caddyserver.com/docs/caddyfile
 
-:80, 443 {
+:80, 443
+(wildcard_cert) {
   tls {
     max_certs 50000
   }
@@ -12,7 +13,9 @@
 }
 
 
-demo.qulph.com:443 {
+*.qulph.com:443 {
+
+    import wildcard_cert
 
     root /var/www/qulph/application/web
 
@@ -35,6 +38,8 @@ demo.qulph.com:443 {
 
 
 api.qulph.com:443 {
+
+    import wildcard_cert
 
     root /var/www/api/api/web
 

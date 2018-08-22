@@ -28,3 +28,33 @@
       dns digitalocean
     }
 }
+
+
+api.qulph.com:443 {
+
+    root /var/www/api/api/web
+
+    fastcgi / php-fpm:9000 php {
+        index index.php
+    }
+
+    # To handle .html extensions change ext to
+    # ext / .html
+
+    rewrite {
+        to {path} {path}/ /index.php?{query}
+    }
+
+    gzip
+    browse
+    log /var/log/caddy/access.log
+    errors /var/log/caddy/error.log
+
+    tls contact@qulph.com
+
+    # To use Lets encrpt tls with a DNS provider uncomment these
+    # lines and change the provider as required
+    tls {
+      dns digitalocean
+    }
+}

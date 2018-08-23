@@ -25,7 +25,7 @@
          sudo docker-compose exec workspace bash -c "
 
             # application dir
-            cd /var/www/shop/application
+            cd /var/www/qulph/application
 
             sh update-dependencies.sh
 

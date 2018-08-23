@@ -32,4 +32,12 @@ api.qulph.com:443 {
 
     root /var/www/api/api/web
 
+    fastcgi / php-fpm:9000 php {
+        index index.php
+    }
+
+    rewrite {
+        to {path} {path}/ /index.php?{query}
+    }
+
 }

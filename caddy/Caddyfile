@@ -1,6 +1,6 @@
 # Docs: https://caddyserver.com/docs/caddyfile
 
-*.qulph.com:443 {
+*:443 {
 
     root /var/www/qulph/application/web
 
@@ -16,7 +16,7 @@
     }
 
     tls contact@qulph.com {
- 		ask https://api.qulph.com/test-domain.php
+ 		ask https://api.qulph.com/v1/site/allowed?access-token=100-token
  		dns digitalocean
  	}
 
